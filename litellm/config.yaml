@@ -1,0 +1,84 @@
+model_list:
+  # ══════════════════════════════════════════
+  #  LLM — 실제 이름
+  # ══════════════════════════════════════════
+  - model_name: qwen3.6-27b
+    litellm_params:
+      model: hosted_vllm/Qwen3.6-27B
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "dummy"
+    model_info:
+      mode: chat
+      supports_function_calling: false
+
+  # ══════════════════════════════════════════
+  #  LLM — Cloudera가 보내는 이름 (테스트용 별칭)
+  # ══════════════════════════════════════════
+  - model_name: gpt-4o
+    litellm_params:
+      model: hosted_vllm/Qwen3.6-27B
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "dummy"
+    model_info:
+      mode: chat
+      supports_function_calling: false
+
+  - model_name: gpt-5
+    litellm_params:
+      model: hosted_vllm/Qwen3.6-27B
+      api_base: http://127.0.0.1:8000/v1
+      api_key: "dummy"
+    model_info:
+      mode: chat
+      supports_function_calling: false
+
+  # ══════════════════════════════════════════
+  #  임베딩 — 실제 이름
+  #  hosted_vllm 으로 실패하면 openai/bge-m3 로 교체
+  # ══════════════════════════════════════════
+  - model_name: bge-m3
+    litellm_params:
+      model: hosted_vllm/bge-m3
+      api_base: http://127.0.0.1:8001/v1
+      api_key: "dummy"
+    model_info:
+      mode: embedding
+
+  # ══════════════════════════════════════════
+  #  임베딩 — Cloudera가 보내는 이름 (테스트용 별칭)
+  # ══════════════════════════════════════════
+  - model_name: text-embedding-3-large
+    litellm_params:
+      model: hosted_vllm/bge-m3
+      api_base: http://127.0.0.1:8001/v1
+      api_key: "dummy"
+    model_info:
+      mode: embedding
+
+  - model_name: text-embedding-ada-002
+    litellm_params:
+      model: hosted_vllm/bge-m3
+      api_base: http://127.0.0.1:8001/v1
+      api_key: "dummy"
+    model_info:
+      mode: embedding
+
+  # ══════════════════════════════════════════
+  #  리랭크
+  #  RAG Studio(OpenAI 프로바이더)는 이 항목을 사용하지 않음.
+  #  LiteLLM 단독 검증용으로만 유지.
+  # ══════════════════════════════════════════
+  - model_name: bge-reranker-v2-m3
+    litellm_params:
+      model: hosted_vllm/bge-reranker-v2-m3
+      api_base: http://127.0.0.1:8002/v1
+      api_key: "dummy"
+    model_info:
+      mode: rerank
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+litellm_settings:
+  drop_params: true
+  request_timeout: 600
