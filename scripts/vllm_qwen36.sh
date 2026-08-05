@@ -5,6 +5,8 @@ export HF_HUB_OFFLINE=1
 export TRANSFORMERS_OFFLINE=1
 export VLLM_NO_USAGE_STATS=1
 export DO_NOT_TRACK=1
+export TRITON_PTXAS_PATH=$(find /opt/vllm/venv -name ptxas | head -1)
+export CUDA_HOME=$(dirname $(dirname $(find /opt/vllm/venv -name ptxas | head -1)))
 
 exec /root/vllm-test/bin/vllm serve /data/ksy_2/model/hf/Qwen/Qwen3.6-27B/artifacts \
   --served-model-name Qwen3.6-27B \
