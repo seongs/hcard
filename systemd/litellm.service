@@ -1,0 +1,20 @@
+[Unit]
+Description=LiteLLM Proxy (vLLM Gateway)
+After=network-online.target vllm.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/litellm
+EnvironmentFile=/etc/sysconfig/litellm
+ExecStart=/opt/litellm/venv/bin/litellm \
+    --config /opt/litellm/config.yaml \
+    --host 0.0.0.0 \
+    --port 8080
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=30
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
